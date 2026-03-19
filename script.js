@@ -1,6 +1,10 @@
 const wordsContainer = document.getElementById('words-container');
-const tg = window.Telegram.WebApp;
-tg.ready();
+const tg = window.Telegram ? window.Telegram.WebApp : null;
+if (tg) {
+    tg.ready();
+} else {
+    console.warn("Приложение запущено вне Telegram или скрипт не загружен");
+}
 const API_URL = 'https://api.egekiller.ru'
 
 

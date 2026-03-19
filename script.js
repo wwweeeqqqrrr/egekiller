@@ -1,7 +1,7 @@
 const wordsContainer = document.getElementById('words-container');
 const tg = window.Telegram.WebApp;
 tg.ready();
-const API_URL = 'http://api.egekiller.ru'
+const API_URL = 'https://api.egekiller.ru'
 
 
 const VOWELS = "аеёиоуыэюя";

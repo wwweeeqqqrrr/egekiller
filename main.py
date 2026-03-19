@@ -21,14 +21,17 @@ async def verify_admin(x_admin_key: str = Header(None)):
             detail="У вас нет прав для выполнения этого действия"
         )
 
+origins = [
+    "https://egekiller.ru",
+    "https://www.egekiller.ru",
+    "https://egekillerw.vercel.app",
+    "http://localhost",
+    "http://localhost:8080"
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-    "https://egekiller.ru",
-    "https://www.egekiller.ru",
-    "https://egekillerw.vercel.app" 
-],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"], # Разрешаем все методы 
     allow_headers=["*"], # Разрешаем все заголовки

@@ -4,14 +4,23 @@ from models import Word
 from sqlalchemy import update
 from typing import List
 from sqlalchemy import select, func
-from fastapi import HTTPException,Header
+from fastapi import HTTPException,Header,status
 from fastapi.middleware.cors import CORSMiddleware
 from security import validate_telegram_data, get_user_data
 from database import get_db
-
+import os
 import schemas
 
 app = FastAPI(title="MonkeyEGE API")
+
+async def verify_admin(x_admin_key: str = Header(None)):
+    
+    if x_admin_key != os.getenv("ADMIN_SECRET"):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="У вас нет прав для выполнения этого действия"
+        )
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,7 +34,7 @@ app.add_middleware(
     allow_headers=["*"], # Разрешаем все заголовки
 )
 @app.post("/words/bulk", response_model=List[schemas.WordResponse])
-async def add_multiple_words(words_list: List[schemas.WordCreate], db: AsyncSession = Depends(get_db)):
+async def add_multiple_words(words_list: List[schemas.WordCreate], db: AsyncSession = Depends(get_db),_ = Depends(verify_admin)):
     """
     Эндпоинт для добавления сразу нескольких слов (массива).
     """
@@ -49,12 +58,10 @@ async def add_multiple_words(words_list: List[schemas.WordCreate], db: AsyncSess
             detail="Ошибка при сохранении. Возможно, одно или несколько слов уже существуют в базе"
         )
     
-@app.get("/")
-async def root():
-    return {"message": "made by 645qrew"}
+
 
 @app.post("/words/", response_model=schemas.WordResponse)
-async def add_word(word: schemas.WordCreate, db: AsyncSession = Depends(get_db)):
+async def add_word(word: schemas.WordCreate, db: AsyncSession = Depends(get_db),_ = Depends(verify_admin)):
 
     new_word = Word(word=word.word,accent_index=word.accent_index)
     db.add(new_word)

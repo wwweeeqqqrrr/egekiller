@@ -1,0 +1,103 @@
+body {
+    background-color: #333;
+    color: #ccc;
+    font-family: 'Courier New', Courier, monospace;
+    /* Убираем фиксированный font-size отсюда, будем задавать буквам */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Используем min-height для мобилок */
+    margin: 0;
+    overflow: hidden; /* Чтобы не было лишних скроллов */
+}
+
+a {
+    text-decoration: none;
+    color: #332;          /* Сделаем её чуть бледнее, чтобы не отвлекала */
+    font-size: 18px;
+    margin-top: 15vh;     /* ОТСТУП СВЕРХУ — это отодвинет её от слова вниз */
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #4CAF50;       /* Подсветка при наведении */
+}
+
+#words-container {
+    width: 95%; /* Больше места на мобильных */
+    max-width: 1200px;
+    display: flex;
+    justify-content: center; /* Центрирует слово по горизонтали */
+    align-items: center;    /* Центрирует слово по вертикали */
+}
+
+.word {
+    display: flex;
+    flex-wrap: wrap;       /* Если слово не влезет в экран, буквы перенесутся */
+    justify-content: center;
+    gap: 10px;             /* Расстояние между буквами */
+}
+
+/* Общие стили для всех букв */
+.vowel, .consonant {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Адаптивный размер букв: подстраивается под ширину экрана */
+    width: 12vw; 
+    height: 12vw;
+    max-width: 80px;  /* Чтобы на десктопе не были огромными */
+    max-height: 80px;
+    
+    font-size: 6vw;   /* Размер текста тоже адаптивный */
+    @media (min-width: 768px) {
+        font-size: 40px; /* Фиксированный размер для больших экранов */
+    }
+
+    color: #222;
+    border-radius: 12px;
+    user-select: none; /* Чтобы текст не выделялся при кликах */
+    transition: transform 0.1s ease; /* Эффект нажатия */
+}
+
+.vowel {
+    background: #C0C0C0;
+    cursor: pointer;
+}
+
+.consonant {
+    background: #606060;
+    /* Можно убрать курсор с согласных, чтобы не путать пользователя */
+    cursor: default; 
+}
+
+.vowel:active {
+    transform: scale(0.9); /* Слегка сжимается при нажатии */
+}
+
+/* Цвета для ответов */
+.correct_letter {
+    background-color: #4CAF50 !important; /* Насыщенный зеленый */
+    color: white;
+}
+
+.incorrect_letter {
+    background-color: #f44336 !important; /* Насыщенный красный */
+    color: white;
+    text-decoration: none; /* Зачеркивание на мобилках иногда плохо видно */
+}
+
+/* Медиа-запрос для совсем маленьких экранов */
+@media (max-width: 480px) {
+    .word {
+        gap: 5px;
+    }
+    .vowel, .consonant {
+        width: 15vw;
+        height: 15vw;
+        border-radius: 8px;
+    }
+}

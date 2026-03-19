@@ -12,15 +12,14 @@ from database import get_db
 import schemas
 
 app = FastAPI(title="MonkeyEGE API")
-origins = [
-    "https://egekiller.ru"
-    "http://localhost",
-    "http://localhost:8080",
-    "null" 
-]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://api.egekiller.ru"],
+    allow_origins=[
+    "https://egekiller.ru",
+    "https://www.egekiller.ru",
+    "https://egekillerw.vercel.app" 
+],
     allow_credentials=True,
     allow_methods=["*"], # Разрешаем все методы 
     allow_headers=["*"], # Разрешаем все заголовки

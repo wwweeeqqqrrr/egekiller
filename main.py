@@ -23,6 +23,7 @@ async def verify_admin(x_admin_key: str = Header(None)):
 
 origins = [
     "https://egekiller.ru",
+    "https://api.egekiller.ru",
     "https://www.egekiller.ru",
     "https://egekillerw.vercel.app",
     "http://localhost",

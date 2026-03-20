@@ -46,12 +46,12 @@ a:hover {
     justify-content: center;
     
  
-    width: 12vw; 
-    height: 12vw;
+    width: 10vw; 
+    height: 10vw;
     max-width: 80px;  
     max-height: 80px;
     
-    font-size: 6vw;   
+    font-size: 8vw;   
     @media (min-width: 768px) {
         font-size: 40px; 
     }

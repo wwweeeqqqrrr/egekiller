@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from models import Word
 from sqlalchemy import update
@@ -93,4 +94,11 @@ async def get_random_words(limit: int = 20, db: AsyncSession = Depends(get_db),i
     words = result.scalars().all()
     print(words)
     return words
+
+
+@app.post("/danger/reset-db")
+async def danger_reset_db(db: AsyncSession = Depends(get_db), _ = Depends(verify_admin)):
+    await db.execute(text("TRUNCATE TABLE words RESTART IDENTITY"))
+    await db.commit()
+    return {"message": "Таблица слов очищена"}
 

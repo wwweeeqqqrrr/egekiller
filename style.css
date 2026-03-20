@@ -2,65 +2,64 @@ body {
     background-color: #333;
     color: #ccc;
     font-family: 'Courier New', Courier, monospace;
-    /* Убираем фиксированный font-size отсюда, будем задавать буквам */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Используем min-height для мобилок */
+    min-height: 100vh; 
     margin: 0;
-    overflow: hidden; /* Чтобы не было лишних скроллов */
+    overflow: hidden; 
 }
 
 a {
     text-decoration: none;
-    color: #332;          /* Сделаем её чуть бледнее, чтобы не отвлекала */
+    color: #332;          
     font-size: 18px;
-    margin-top: 15vh;     /* ОТСТУП СВЕРХУ — это отодвинет её от слова вниз */
+    margin-top: 15vh;     
     transition: color 0.3s;
     cursor: pointer;
 }
 
 a:hover {
-    color: #4CAF50;       /* Подсветка при наведении */
+    color: #4CAF50;      
 }
 
 #words-container {
-    width: 95%; /* Больше места на мобильных */
+    width: 95%; 
     max-width: 1200px;
     display: flex;
-    justify-content: center; /* Центрирует слово по горизонтали */
-    align-items: center;    /* Центрирует слово по вертикали */
+    justify-content: center; 
+    align-items: center;    
 }
 
 .word {
     display: flex;
-    flex-wrap: wrap;       /* Если слово не влезет в экран, буквы перенесутся */
+    flex-wrap: wrap;      
     justify-content: center;
-    gap: 10px;             /* Расстояние между буквами */
+    gap: 10px;             
 }
 
-/* Общие стили для всех букв */
+
 .vowel, .consonant {
     display: flex;
     align-items: center;
     justify-content: center;
     
-    /* Адаптивный размер букв: подстраивается под ширину экрана */
+ 
     width: 12vw; 
     height: 12vw;
-    max-width: 80px;  /* Чтобы на десктопе не были огромными */
+    max-width: 80px;  
     max-height: 80px;
     
-    font-size: 6vw;   /* Размер текста тоже адаптивный */
+    font-size: 6vw;   
     @media (min-width: 768px) {
-        font-size: 40px; /* Фиксированный размер для больших экранов */
+        font-size: 40px; 
     }
 
     color: #222;
     border-radius: 12px;
-    user-select: none; /* Чтобы текст не выделялся при кликах */
-    transition: transform 0.1s ease; /* Эффект нажатия */
+    user-select: none; 
+    transition: transform 0.1s ease; 
 }
 
 .vowel {
@@ -70,27 +69,27 @@ a:hover {
 
 .consonant {
     background: #606060;
-    /* Можно убрать курсор с согласных, чтобы не путать пользователя */
+
     cursor: default; 
 }
 
 .vowel:active {
-    transform: scale(0.9); /* Слегка сжимается при нажатии */
+    transform: scale(0.9); 
 }
 
-/* Цвета для ответов */
+
 .correct_letter {
-    background-color: #4CAF50 !important; /* Насыщенный зеленый */
+    background-color: #4CAF50 !important; 
     color: white;
 }
 
 .incorrect_letter {
-    background-color: #f44336 !important; /* Насыщенный красный */
+    background-color: #f44336 !important; 
     color: white;
-    text-decoration: none; /* Зачеркивание на мобилках иногда плохо видно */
+    text-decoration: none; 
 }
 
-/* Медиа-запрос для совсем маленьких экранов */
+
 @media (max-width: 480px) {
     .word {
         gap: 5px;

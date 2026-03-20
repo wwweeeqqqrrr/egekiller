@@ -34,8 +34,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"], # Разрешаем все методы 
-    allow_headers=["*"], # Разрешаем все заголовки
+    allow_methods=["*"],
+    allow_headers=["*"], #
 )
 @app.post("/words/bulk", response_model=List[schemas.WordResponse])
 async def add_multiple_words(words_list: List[schemas.WordCreate], db: AsyncSession = Depends(get_db),_ = Depends(verify_admin)):

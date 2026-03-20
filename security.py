@@ -46,7 +46,7 @@ async def validate_telegram_data(init_data: str) -> bool:
         return False
 
 def get_user_data(init_data: str) -> dict:
-    """Извлекает и декодирует данные пользователя из валидной init_data."""
+    """Извлекает и декодирует данные пользователя из валидной init_data"""
     parsed_data = dict(parse_qsl(init_data))
     if "user" in parsed_data:
      

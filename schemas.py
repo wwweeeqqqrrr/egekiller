@@ -4,8 +4,6 @@ class WordCreate(BaseModel):
     word: str
     accent_index: int
     
-    
-
 
 class WordResponse(BaseModel):
     id: int

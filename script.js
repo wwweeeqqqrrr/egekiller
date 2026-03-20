@@ -24,7 +24,7 @@ async function fetchWords() {  // ПОЛУЧЕНИЕ СЛОВ С БЭКЕНДА
         
     } catch (error) {
         console.error("Ошибка при загрузке слов:", error);
-        wordsContainer.textContent = `Не удалось загрузить слова. Убедитесь, что бэкенд запущен.${error}`;
+        wordsContainer.textContent = `Не удалось загрузить слова,перейдите в Telegram Web App${error}`;
     }
 }
 
@@ -62,18 +62,9 @@ function displayCurrentWord() {
 
    
     
-    // 
-    // highlightCurrentLetter();
+    
 }
-// displayCurrentWord(words[0])
-// // Функция для подсветки текущей буквы
-// function highlightCurrentLetter() {
-//     const wordDiv = wordsContainer.children[currentWordIndex];
-//     const letterSpan = wordDiv.children[currentLetterIndex];
-//     letterSpan.classList.add('active');
-// }
 
-// // Запускаем всё при загрузке страницы
 fetchWords();
 
 
@@ -96,105 +87,3 @@ wordsContainer.addEventListener('click',(e)=>{
 
 })
     
-        
-// document.addEventListener('keydown', (event) => {
-//     // Если все слова напечатаны, ничего не делаем
-//     if (currentWordIndex >= words.length) {
-//         return;
-//     }
-
-//     const currentWordDiv = wordsContainer.children[currentWordIndex];
-    
-//     // --- Логика перехода на следующее слово по пробелу ---
-//     if (event.key === ' ') {
-//         // Запрещаем стандартное поведение пробела (прокрутку страницы)
-//         event.preventDefault(); 
-        
-//         // Переходим, только если мы закончили печатать слово
-//         if (currentLetterIndex === currentWordDiv.children.length) {
-//             currentWordIndex++; // Переключаемся на следующее слово
-//             currentLetterIndex = 0; // Сбрасываем счетчик букв
-
-//             // Проверяем, не закончились ли слова
-//             if (currentWordIndex < words.length) {
-//                  highlightCurrentLetter();
-//             } else {
-//                 wordsContainer.innerHTML = '<h2>Тренировка окончена!</h2>';
-//             }
-//         }
-//         return; // Выходим, чтобы не обрабатывать пробел как букву
-//     }
-
-//     // --- Логика проверки букв (твой код, но с защитой от ошибки) ---
-//     // Не даем печатать дальше, если слово уже закончилось
-//     if (currentLetterIndex >= currentWordDiv.children.length) {
-//         return; 
-//     }
-
-//     const currentLetterSpan = currentWordDiv.children[currentLetterIndex];
-//     const expectedLetter = currentLetterSpan.textContent;
-    
-//     // Не реагируем на служебные клавиши, которые могли просочиться
-//     if (event.key.length !== 1) return;
-    
-//     const typedLetter = event.key;
-
-//     // Снимаем старую подсветку
-//     currentLetterSpan.classList.remove('active');
-
-//     // Твой код здесь работает идеально!
-//     if (typedLetter === expectedLetter) {
-//         currentLetterSpan.classList.add('correct');
-//     } else {
-//         currentLetterSpan.classList.add('incorrect');
-//         sessionMistakes.add(words[currentWordIndex].id);
-//     }
-    
-//     currentLetterIndex++; // Переходим к следующей букве
-
-//     // Подсвечиваем новую букву, если она есть
-//     if (currentLetterIndex < currentWordDiv.children.length) {
-//         highlightCurrentLetter();
-//     } else if (currentWordIndex < words.length - 1) {
-//         // Если слово кончилось, можно показать "пробел" для перехода
-//         // (это мы сделаем позже, пока просто ждем нажатия)
-//     }
-// });
-
-// async function finishSession() {
-//     // 1. Собираем все ID слов из текущей сессии
-//     const allWordIds = words.map(word => word.id);
-
-//     // 2. Превращаем наш Set с ошибками в обычный массив
-//     const mistakenWordIds = Array.from(sessionMistakes);
-
-//     console.log("Все слова в сессии:", allWordIds);
-//     console.log("Слова с ошибками:", mistakenWordIds);
-
-//     // 3. Отправляем данные на бэкенд
-//     try {
-//         const results = {
-//             user_id: 1, // Временно, пока нет регистрации
-//             all_words: allWordIds,
-//             mistaken_words: mistakenWordIds
-//         };
-        
-//         // Эндпоинт теперь назовем более логично: /stats/session
-//         const response = await fetch(`${API_URL}/stats/session`, {
-//             method: 'POST',
-//             headers: {'Content-Type': 'application/json'},
-//             body: JSON.stringify(results)
-//         });
-
-//         if (response.ok) {
-//             console.log("Статистика сессии успешно сохранена!");
-//             wordsContainer.innerHTML = '<h2>Тренировка окончена!</h2><h3>Результаты сохранены.</h3>';
-//         } else {
-//             const errorData = await response.json();
-//             console.error("Ошибка сохранения статистики:", errorData);
-//         }
-
-//     } catch (error) {
-//         console.error("Сетевая ошибка:", error);
-//     }
-// }
